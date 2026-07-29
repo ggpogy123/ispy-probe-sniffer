@@ -33,3 +33,25 @@ Read through these to understand how it works:
 
 ### Problems
 Nothing till now as i'm also using AI to make me understand wherever i get stuck.
+
+
+---
+
+## July 29 - Day 2 (1.5 hrs)
+
+### What I did
+I set up the environment on Wokwi and initialized the WiFi adapter in promiscuous mode using `esp_wifi` APIs. I also verified serial output to make sure the board boots and enters promiscuous mode nicely.
+
+
+### What I learned
+Standard WiFi connection modes require joining an Access Point, but promiscuous mode allows the ESP32 radio antenna to passively capture raw 802.11 packets floating around on the set channel without authenticating to any network.
+
+### Documentation followed:
+- [ESP-IDF WiFi Promiscuous Mode](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#promiscuous-mode)
+
+### Screenshots
+<img width="2559" height="1477" alt="image" src="https://github.com/user-attachments/assets/8959bab3-68d7-49f9-bb8b-1f33b94c532a" />
+
+
+### Problems
+Wokwi can't simulate this Wi-Fi thing (no actual  devices broadcasting packets in the simulation), so real packets won't trigger automatically in the simulator. Will need to simulate incoming packet data for the same later.
