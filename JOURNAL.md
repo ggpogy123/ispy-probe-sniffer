@@ -1,4 +1,4 @@
-# Journal
+# Journal (11 hrs)
 
 ## July 28 - Day 1 (2 hrs)
 
@@ -80,4 +80,22 @@ Most of the code writing has been done by me, I used Claude to understand the do
 <img width="2559" height="1408" alt="image" src="https://github.com/user-attachments/assets/434ed8b4-f8e4-4ec2-911a-9eb11f60a680" />
 <img width="2559" height="1336" alt="image" src="https://github.com/user-attachments/assets/846ce8ff-dc97-4242-be37-2771d6cf8b32" />
 
+---
+
+## August 5- Day 4 (1.5 hrs)
+### What i did
+Today I implemented a button to clear the screen and reset the probe logs. I wired one side of the button to pin `19` and the other directly to `GND`. I also restructured the main loop of the code with the help of AI to handle the button input properly.
+### What I learned
+Because Wokwi can't simulate the real Wi-Fi packets, we had hardcoded the probes and I was using `delay(3000)` to have gap between them. It turns out that `delay()` freezes the ESP32 completely for 3 seconds and the board becomes completely unresponsive.
+
+To fix this, I learned how to use `millis()` to track time instead. By adding a variable (`lastProbeTime`) and checking if 3000 milliseconds have passed, the loop() can keep running many times a second. This means it can constantly listen for the button press and react instantly while still waiting the full 3 seconds before showing the next fake probe.
+
+I also figured out how the buttons actually work in the simulator. You have to wire them diagonally to guarantee the circuit only closes when you physically click it down. I earlier connected in the same direction and it was keeping it pressed down which was annoying to say at the least lol.
+### Screenshots
+<img width="2559" height="1471" alt="image" src="https://github.com/user-attachments/assets/e1010348-88d5-489f-9729-74d4b475d083" />
+<img width="673" height="93" alt="image" src="https://github.com/user-attachments/assets/6530fdf8-be8f-4c44-b15c-66a20a730957" />
+<img width="703" height="563" alt="image" src="https://github.com/user-attachments/assets/540b31d2-3ddf-44d2-ac00-7678a8c2290c" />
+
+### Problems Encountered
+My button was completely unresponsive at first and then when I was messing randomly with the code, it started automatically clearing the log in an infinite loop without me even pressing it. I used AI to debug the issue, which pointed out that the delay function was blocking the button reads and helped me write the `millis()` thing to fix it permanently.
 
